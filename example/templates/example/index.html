@@ -6,30 +6,33 @@
 {% endblock css %}
 
 {% block main %}
-
-{% if name %}
 <div style="width:100%; text-align:center">
-<ul class="home">
-    <li>Examples:</li>
-    <li><a href="/flickr">/flickr</a></li>
-    <li><a href="/instagram">/instagram</a></li>
-    <li><a href="/tumblr">/tumblr</a></li>
-    <li><a href="/twitter">/twitter</a></li>
-</ul>
-</div>
-{% endif %}
 
-{% if popular %}
+    {% if name %}
 
-    <ul>
-    {% for p in popular %}
-        <li><img src="{{ p }}"></li>
-    {% endfor %}
+    <ul class="home">
+        <li>Examples:</li>
+        <li><a href="/flickr">/flickr</a></li>
+        <li><a href="/instagram">/instagram</a></li>
+        <li><a href="/tumblr">/tumblr</a></li>
+        <li><a href="/twitter">/twitter</a></li>
     </ul>
-{% endif %}
 
-{% if twitters %}
-{{ twitters }}
-{% endif %}
+    {% endif %}
 
+    {% if popular %}
+
+        <ul>
+        {% for p in popular %}
+            <li><img src="{{ p }}"></li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if twitters %}
+    {{ twitters }}
+    {% endif %}
+
+
+</div>
 {% endblock main %}
