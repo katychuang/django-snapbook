@@ -5,7 +5,10 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+                       url(r'^$', 'example.views.home'),  # home page
+                       url(r'^flickr/$', 'example.views.flickr'),  # Flickr
                        url(r'^instagram/$', 'example.views.grams'),  # Instagram
+                       url(r'^tumblr/$', 'example.views.tumblr'),  # Tumblr
                        url(r'^twitter/$', 'example.views.tweets'),  # Twitter
 
                        # Examples:
@@ -16,4 +19,4 @@ urlpatterns = patterns('',
 
                        # Uncomment the next line to enable the admin:
                        # url(r'^admin/', include(admin.site.urls)),
-)
+                       )
