@@ -21,8 +21,20 @@ h2 {
 	text-align: center;
 }
 
-li {
+ul li {
     text-align: center;
     list-style-type: none;
 }
 
+.home li {
+    display: inline;
+    margin: 20px;
+}
+
+.home li a {
+    color: #2083ad;
+}
+
+.home li a:hover {
+    color: #aa1111;
+}
