@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from instagram.client import InstagramAPI
 # import twitter, tweetstream
-import tweepy
+import tweepy, simplejson, urllib
 import flickrapi
 #import img_downloader, image_list
 
@@ -55,8 +55,25 @@ def grams(request):
 def tumblr(request):
     tag = "fashion"
     api_key = "6X5uXLI78DNVdntorxVJ0r2LHsMYAxva9Vf3NaV9diua1K5SIB"
-    t = "http://api.tumblr.com/v2/tagged?api_key=%stag=%s".format(api_key, tag)
-    return render_to_response("example/index.html", {'twitters': t, 'page_title': 'Photos from tumblr'})
+    tumblr= 'http://api.tumblr.com/v2/tagged?api_key={0}&tag={1}'.format(api_key, tag)
+
+    t = []
+    result2 = simplejson.load(urllib.urlopen(tumblr))
+    for p in result2['response']:
+
+        if ('photos' in p):
+            x = p['photos']
+            for item in x:
+                imgpath = item['original_size']['url']
+                alt = item['alt_sizes']
+                thumbnail = alt[1]['url']  # len(alt)-3
+                t.append(imgpath)
+
+
+
+    return render_to_response("example/index.html",
+                              {'popular': t, 'page_title': 'Photos from tumblr'}
+                              )
 
 
 def tweets(request):
