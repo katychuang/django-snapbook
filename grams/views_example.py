@@ -9,8 +9,11 @@ def home(request):
     # for media in recent_media:
     #     print media.caption.text
 
-    api = InstagramAPI(client_id='d60340d55d864859a9d3a34f50a6d816', client_secret='89d0d579e9714a9780c4352aa3872968')
+    api = InstagramAPI(client_id='CLIENT_ID', client_secret='CLIENT_SECRET_KEY')
+
+    #get popular images
     popular_media = api.media_popular(count=20)
+
     p = []
     for media in popular_media:
         print media.images['standard_resolution'].url
