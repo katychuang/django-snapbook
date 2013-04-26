@@ -1,0 +1,31 @@
+<!doctype html>
+    <head>
+    {% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/global.css" />
+    {% endblock css %}
+    </head>
+
+<body>
+{% block header %}
+<h2>Photos from Instagram</h2>
+{% endblock header %}
+
+
+
+{% block main %}
+{% endblock main %}
+
+
+{% block footer %}
+<h2>
+    <font size="1">&copy; 2013 Katherine Chuang</font>
+</h2>
+{% endblock footer %}
+
+{% block javascript %}
+<script src="{{ STATIC_URL }}js/fonts.js"></script>
+
+{% endblock javascript %}
+
+</body>
+</html>

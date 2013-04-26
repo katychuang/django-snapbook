@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block css %}
+{{ block.super }}
+
+{% endblock css %}
+
+{% block main %}
+{% if popular %}
+
+    <ul>
+    {% for p in popular %}
+        <li><img src="{{ p }}"></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No images  available.</p>
+{% endif %}
+
+{% endblock main %}
