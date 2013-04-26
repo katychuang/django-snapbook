@@ -1,4 +1,7 @@
-#This django app takes photos from common social API's.
+#django-snapbook
+
+This django app takes photos from common social API's.
+
 
 Setup
 -----
