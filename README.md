@@ -11,10 +11,13 @@ To use this, first install the following
 
 
 Sign up for the developer access keys at each website.
-Flickr [http://www.flickr.com/services/api/]
-Instagram [http://instagram.com/developer/clients/manage/]
-Tumblr [http://bestpracticesfororgs.tumblr.com/API]
-Twitter [https://dev.twitter.com/]
+
+- Flickr [http://www.flickr.com/services/api/]
+- Instagram [http://instagram.com/developer/clients/manage/]
+- Tumblr [http://bestpracticesfororgs.tumblr.com/API]
+- Twitter [https://dev.twitter.com/]
+
+Rename views_example.py to views.py and plop in your developer keys.
 
 Usage
 -----
