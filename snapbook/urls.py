@@ -10,7 +10,7 @@ urlpatterns = patterns('',
                        url(r'^instagram/$', 'example.views.grams'),  # Instagram
                        url(r'^tumblr/$', 'example.views.tumblr'),  # Tumblr
                        url(r'^twitter/$', 'example.views.tweets'),  # Twitter
-
+                       url(r'^search/$', 'example.views.search'),
                        # Examples:
                        # url(r'^snapbook/', include('snapbook.foo.urls')),
 

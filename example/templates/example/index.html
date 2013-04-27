@@ -12,27 +12,45 @@
 
     <ul class="home">
         <li>Examples:</li>
-        <li><a href="/flickr">/flickr</a></li>
+        <!--li><a href="/flickr">/flickr</a></li-->
         <li><a href="/instagram">/instagram</a></li>
         <li><a href="/tumblr">/tumblr</a></li>
-        <li><a href="/twitter">/twitter</a></li>
+        <!--li><a href="/twitter">/twitter</a></li-->
     </ul>
+
+    <div>
+        <form method="get" action="/search/">
+            <input type="input" name="q" id="id_q"  />
+            <input type="submit" value="Search">
+        </form>
+    </div>
 
     {% endif %}
 
-    {% if popular %}
+    {% if found_entries %}
+        <h2>What is '{{ found_entries }}'?</h2>
 
-        <ul>
+
+    {% if popular %}
+    <div style="width:100%; overflow:auto;white-space: nowrap;border:1px solid teal">
+        <ul class="photos">
         {% for p in popular %}
-            <li><img src="{{ p }}"></li>
+            <li><img src="{{ p }}" height="100"></li>
         {% endfor %}
         </ul>
+    </div>
     {% endif %}
 
     {% if twitters %}
     {{ twitters }}
     {% endif %}
 
+        <h2>What is written about '{{ found_entries }}'?</h2>
 
+
+
+    {% endif %} <!-- End Found Entries -->
 </div>
+
+
 {% endblock main %}

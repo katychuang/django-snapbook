@@ -4,6 +4,12 @@ from instagram.client import InstagramAPI
 import tweepy, simplejson, urllib
 import flickrapi
 #import img_downloader, image_list
+from django.http import HttpResponse
+from django.template import loader, Context
+from django.contrib.flatpages.models import FlatPage
+from django.db.models import Q
+from django.template import RequestContext
+import re
 
 
 def home(request):
@@ -11,28 +17,29 @@ def home(request):
 
 
 def flickr(request):
+    # url = 'http://api.flickr.com/services/rest/'
+    # method = 'flickr.groups.pools.getPhotos'
     api_key = 'ee91a3c21445b9f06b15d26f977dbde3'
     api_secret = '884bf333ad3b377b'
-
+    # group_id = '826069%40N20'
     flickr = flickrapi.FlickrAPI(api_key, api_secret, format='json')
     photos = flickr.photos_search(user_id='73509078@N00', per_page='10')
-    sets = flickr.photosets_getList(user_id='73509078@N00')
+    # sets = flickr.photosets_getList(user_id='73509078@N00')
 
-    # group_id=826069%40N20
+    # flickrurl = "http://api.flickr.com/services/rest/?method=flickr.groups.pools.getPhotos&api_key=ee91a3c21445b9f06b15d26f977dbde3&group_id=826069%40N20&format=json&nojsoncallback=1&api_sig=b40d682ab5e48505e89c35badb626bdf"
+    # result = simplejson.load(urllib.urlopen(flickrurl))
+    print result
+    #print result['photos']
+    #pprint(result['photos']['photo'])
+    t = []
+    for item in result['photos']['photo']:
+        print item
+        src = "http://farm{0}.staticflickr.com/{1}/{2}_{3}.jpg".format(item['farm'], item['server'], item['id'], item['secret'])
+        t.append(src)
+        #imgpath = "<div class=\"slide\"><img src=\"" + src + "\"></div>"
+        #print imgpath
 
-    # result = simplejson.load(urllib.urlopen(url))
-    # #print result['photos']
-    # #pprint(result['photos']['photo'])
-
-    # for item in result['photos']['photo']:
-    #     src = "http://farm{0}.staticflickr.com/{1}/{2}_{3}.jpg".format(item['farm'], item['server'], item['id'], item['secret'])
-    #     imgpath = "<div class=\"slide\"><img src=\"" + src + "\"></div>"
-    #     print imgpath
-
-    return render_to_response("example/index.html", {'twitters': sets,
-        'page_title': 'Photos from Flickr'})
-
-
+    return render_to_response("example/index.html", {'popular': t, 'page_title': 'Photos from Flickr'})
 
 
 def grams(request):
@@ -117,8 +124,80 @@ def tweets(request):
     #                   access_token_secret='982gQiVr0QtjSBGHnho8b13RUpNo5TazUO5AHgzR30')
     # #print api.VerifyCredentials()
     # t = twitter.Trend(query='fashion')
-
-
     return render_to_response("example/index.html",
-                              {'twitters': t,
-                               'page_title': 'Photos from twitter'})
+                              {'twitters': t, 'page_title': 'Photos from Twitter'})
+
+
+def normalize_query(query_string,
+                    findterms=re.compile(r'"([^"]+)"|(\S+)').findall,
+                    normspace=re.compile(r'\s{2,}').sub):
+    ''' Splits the query string in invidual keywords, getting rid of unecessary spaces
+        and grouping quoted words together.
+        Example:
+
+        >>> normalize_query('  some random  words "with   quotes  " and   spaces')
+        ['some', 'random', 'words', 'with quotes', 'and', 'spaces']
+
+    '''
+    return [normspace(' ', (t[0] or t[1]).strip()) for t in findterms(query_string)]
+
+
+def get_query(query_string, search_fields):
+    ''' Returns a query, that is a combination of Q objects. That combination
+        aims to search keywords within a model by testing the given search fields.
+
+    '''
+    query = None  # Query to search for every search term
+    terms = normalize_query(query_string)
+    for term in terms:
+        or_query = None  # Query to search for a given term in each field
+        for field_name in search_fields:
+            q = Q(**{"%s__icontains" % field_name: term})
+            if or_query is None:
+                or_query = q
+            else:
+                or_query = or_query | q
+        if query is None:
+            query = or_query
+        else:
+            query = query & or_query
+    return query
+
+# def search(request):
+#     query = request.GET['q']
+#     results = FlatPage.objects.filter(content__icontains=query)
+#     template = loader.get_template()
+#     context = Context({'query': query, 'results': results})
+#     response = template.render(context)
+#     return HttpResponse(response)
+
+
+def search(request):
+    query_string = ''
+    found_entries = None
+    if ('q' in request.GET) and request.GET['q'].strip():
+        query_string = request.GET['q']
+
+        #entry_query = get_query(query_string, ['title', 'body'])
+        #found_entries = query_string  # Entry.objects.filter(entry_query).order_by('-pub_date')
+
+        api_key = "6X5uXLI78DNVdntorxVJ0r2LHsMYAxva9Vf3NaV9diua1K5SIB"
+        tumblr = 'http://api.tumblr.com/v2/tagged?api_key={0}&tag={1}'.format(api_key, query_string)
+
+        t = []
+        result2 = simplejson.load(urllib.urlopen(tumblr))
+        for p in result2['response']:
+
+            if ('photos' in p):
+                x = p['photos']
+                for item in x:
+                    #imgpath = item['original_size']['url']
+                    alt = item['alt_sizes']
+                    thumbnail = alt[1]['url']  # len(alt)-3
+                    t.append(thumbnail)
+
+    return render_to_response('example/index.html',
+                              {'query_string': query_string, 'found_entries': found_entries, 'popular': t},
+                              context_instance=RequestContext(request))
+
+
