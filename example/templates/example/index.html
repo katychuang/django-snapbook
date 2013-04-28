@@ -39,15 +39,13 @@
 
 
     {% if query_string %}
-        <h2>What is '{{ query_string }}'?</h2>
-
-    <h1>{{ definition }}</h1>
+        <h1>{{ query_string }} ({{ pos }}) : {{ definition }}</h1>
 
     {% if tumble %}
-    <div style="width:100%; overflow:auto;white-space: nowrap;border:1px solid teal">
+    <div style="width:100%; overflow:auto">
         <ul class="photos">
         {% for p in tumble %}
-            <li><img src="{{ p }}" height="100"></li>
+            <li><img src="{{ p }}" height="200"></li>
         {% endfor %}
         </ul>
     </div>
@@ -57,7 +55,7 @@
     {{ twitters }}
     {% endif %}
 
-        <h2>What is written about '{{ query_string }}'?</h2>
+        <!--h2>What is written about '{{ query_string }}'?</h2-->
 
     {% if nyt %}
     <div style="">

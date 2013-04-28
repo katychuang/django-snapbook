@@ -185,21 +185,21 @@ def search(request):
         tumblr = 'http://api.tumblr.com/v2/tagged?api_key={0}&tag={1}'.format(api_key, query_string)
 
         nyt_api = "17d9623f92b7aab6e1430b41b1927462:14:67612802"
-        nyt = "http://api.nytimes.com/svc/search/v1/article?format=json&query=cat&api-key=17d9623f92b7aab6e1430b41b1927462:14:67612802"
+        nyt = "http://api.nytimes.com/svc/search/v1/article?format=json&query={0}&api-key=17d9623f92b7aab6e1430b41b1927462:14:67612802".format(query_string)
 
         pearson_api = "191974694fb48173856e0f213e19a413"
         pearson = "http://api.pearson.com/v2/dictionaries/entries?headword="+query_string+"&apikey="+pearson_api
         resultP = simplejson.load(urllib.urlopen(pearson))
         definition = resultP['results'][0]['senses'][0]['definition']
-
+        pos = resultP['results'][0]['part_of_speech']
         n = []
-        result1 = simplejson.load(urllib.urlopen(nyt))
+        #result1 = simplejson.load(urllib.urlopen(nyt))
         #print result1
-        for p in result1['results']:
-            title = p['title']
-            author = p['byline']
-            body = p['body']
-            n.append({'title': title, 'author': author, 'body': body})
+        # for p in result1['results']:
+        #     title = p['title']
+        #     author = p['byline']
+        #     body = p['body']
+        #     n.append({'title': title, 'author': author, 'body': body})
 
         t = []
         result2 = simplejson.load(urllib.urlopen(tumblr))
@@ -214,7 +214,7 @@ def search(request):
                     t.append(thumbnail)
 
     return render_to_response('example/index.html',
-                              {'query_string': query_string, 'tumble': t, 'nyt': n, 'definition':definition},
+                              {'query_string': query_string, 'tumble': t, 'nyt': n, 'pos': pos, 'definition':definition},
                               context_instance=RequestContext(request))
 
 
