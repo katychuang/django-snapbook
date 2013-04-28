@@ -41,6 +41,7 @@
     {% if query_string %}
         <h2>What is '{{ query_string }}'?</h2>
 
+    <h1>{{ definition }}</h1>
 
     {% if tumble %}
     <div style="width:100%; overflow:auto;white-space: nowrap;border:1px solid teal">
@@ -59,8 +60,7 @@
         <h2>What is written about '{{ query_string }}'?</h2>
 
     {% if nyt %}
-    nyt
-    <div style="width:100%; overflow:auto;white-space: nowrap;border:1px solid teal">
+    <div style="">
         <ul class="articles">
         {% for p in nyt %}
             <li>{{ p.title }} by {{ p.author }}</li>
