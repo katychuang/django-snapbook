@@ -184,6 +184,18 @@ def search(request):
         api_key = "6X5uXLI78DNVdntorxVJ0r2LHsMYAxva9Vf3NaV9diua1K5SIB"
         tumblr = 'http://api.tumblr.com/v2/tagged?api_key={0}&tag={1}'.format(api_key, query_string)
 
+        nyt_api = "17d9623f92b7aab6e1430b41b1927462:14:67612802"
+        nyt = "http://api.nytimes.com/svc/search/v1/article?format=json&query=cat&api-key=17d9623f92b7aab6e1430b41b1927462:14:67612802"
+
+        n = []
+        result1 = simplejson.load(urllib.urlopen(nyt))
+        #print result1
+        for p in result1['results']:
+            title = p['title']
+            author = p['byline']
+            body = p['body']
+            n.append({'title': title, 'author': author, 'body': body})
+
         t = []
         result2 = simplejson.load(urllib.urlopen(tumblr))
         for p in result2['response']:
@@ -197,7 +209,7 @@ def search(request):
                     t.append(thumbnail)
 
     return render_to_response('example/index.html',
-                              {'query_string': query_string, 'found_entries': found_entries, 'popular': t},
+                              {'query_string': query_string, 'tumble': t, 'nyt': n},
                               context_instance=RequestContext(request))
 
 

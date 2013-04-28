@@ -27,10 +27,6 @@
 
     {% endif %}
 
-    {% if found_entries %}
-        <h2>What is '{{ found_entries }}'?</h2>
-
-
     {% if popular %}
     <div style="width:100%; overflow:auto;white-space: nowrap;border:1px solid teal">
         <ul class="photos">
@@ -41,12 +37,37 @@
     </div>
     {% endif %}
 
+
+    {% if query_string %}
+        <h2>What is '{{ query_string }}'?</h2>
+
+
+    {% if tumble %}
+    <div style="width:100%; overflow:auto;white-space: nowrap;border:1px solid teal">
+        <ul class="photos">
+        {% for p in tumble %}
+            <li><img src="{{ p }}" height="100"></li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
     {% if twitters %}
     {{ twitters }}
     {% endif %}
 
-        <h2>What is written about '{{ found_entries }}'?</h2>
+        <h2>What is written about '{{ query_string }}'?</h2>
 
+    {% if nyt %}
+    nyt
+    <div style="width:100%; overflow:auto;white-space: nowrap;border:1px solid teal">
+        <ul class="articles">
+        {% for p in nyt %}
+            <li>{{ p.title }} by {{ p.author }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
 
 
     {% endif %} <!-- End Found Entries -->
