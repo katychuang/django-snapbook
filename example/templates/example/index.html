@@ -42,11 +42,15 @@
     </div>
     {% endif %}
 
-    <h2><a href="/">&lt; Home</a></h2>
+
     {% if definition == "DNE" %}
+        <h2><a href="/">&lt; Home</a></h2>
         <h1><em>no definitions found for {{ query_string }}  but maybe these photos will help you understand the word.</em></h1>
-    {% else %}
+    {% elif definition  %}
+        <h2><a href="/">&lt; Home</a></h2>
         <h1>{{ query_string }} ({{ pos }}) : {{ definition }}</h1>
+    {% else %}
+        &nbsp;
     {% endif %}
 
     {% if tumble %}

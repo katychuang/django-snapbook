@@ -76,8 +76,6 @@ def tumblr(request):
                 thumbnail = alt[1]['url']  # len(alt)-3
                 t.append(imgpath)
 
-
-
     return render_to_response("example/index.html",
                               {'popular': t, 'page_title': 'Photos from tumblr'}
                               )
@@ -124,6 +122,7 @@ def tweets(request):
     #                   access_token_secret='982gQiVr0QtjSBGHnho8b13RUpNo5TazUO5AHgzR30')
     # #print api.VerifyCredentials()
     # t = twitter.Trend(query='fashion')
+
     return render_to_response("example/index.html",
                               {'twitters': t, 'page_title': 'Photos from Twitter'})
 
@@ -163,23 +162,12 @@ def get_query(query_string, search_fields):
             query = query & or_query
     return query
 
-# def search(request):
-#     query = request.GET['q']
-#     results = FlatPage.objects.filter(content__icontains=query)
-#     template = loader.get_template()
-#     context = Context({'query': query, 'results': results})
-#     response = template.render(context)
-#     return HttpResponse(response)
-
 
 def search(request):
     query_string = ''
     found_entries = None
     if ('q' in request.GET) and request.GET['q'].strip():
         query_string = request.GET['q']
-
-        #entry_query = get_query(query_string, ['title', 'body'])
-        #found_entries = query_string  # Entry.objects.filter(entry_query).order_by('-pub_date')
 
         api_key = "6X5uXLI78DNVdntorxVJ0r2LHsMYAxva9Vf3NaV9diua1K5SIB"
         tumblr = 'http://api.tumblr.com/v2/tagged?api_key={0}&tag={1}'.format(api_key, query_string)
