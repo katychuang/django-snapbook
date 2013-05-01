@@ -67,9 +67,11 @@
 
     {% if nyt %}
     <div style="">
+        <h1>Articles about {{ query_string }} from the New York Times</h1>
         <ul class="articles">
         {% for p in nyt %}
-            <li>{{ p.title }} by {{ p.author }}</li>
+            <li><a href="{{ p.url }}"><b>{{ p.title }} </b></a>
+                by {{ p.author }}<br /><small> {{ p.body }}</small></li>
         {% endfor %}
         </ul>
     </div>

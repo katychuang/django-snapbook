@@ -202,13 +202,17 @@ def search(request):
             pos = ""
 
         n = []
-        #result1 = simplejson.load(urllib.urlopen(nyt))
+        result1 = simplejson.load(urllib.urlopen(nyt))
         #print result1
-        # for p in result1['results']:
-        #     title = p['title']
-        #     author = p['byline']
-        #     body = p['body']
-        #     n.append({'title': title, 'author': author, 'body': body})
+        for p in result1['results']:
+            try:
+                title = p['title']
+                author = p['byline']
+                body = p['body']
+                u = p['url']
+                n.append({'title': title, 'author': author, 'body': body, 'url': u})
+            except:
+                pass
 
         t = []
         result2 = simplejson.load(urllib.urlopen(tumblr))
