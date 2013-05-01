@@ -9,9 +9,11 @@
 <div style="width:100%; text-align:center">
 
     {% if name %}
+     <p style="font-size:14pt">This is an example of a django app connecting to social APIs. <br />
+            Code at <a href="http://github.com/katychuang/django-snapbook">github</a></p>
 
     <ul class="home">
-        <li>Show Image Feeds:</li>
+        <li>Examples of pulling images from social api:</li>
         <!--li><a href="/flickr">/flickr</a></li-->
         <li><a href="/instagram">/instagram</a></li>
         <li><a href="/tumblr">/tumblr</a></li>
@@ -19,12 +21,14 @@
     </ul>
 
     <div>
-        Get a definition
         <form method="get" action="/search/">
+            <label>Example of finding definition:</label>
             <input type="text" placeholder="Type something..." name="q" id="id_q" size="35" />
             <input type="submit" value="Search">
         </form>
     </div>
+
+    <hr />
 
     {% endif %}
 
@@ -38,10 +42,12 @@
     </div>
     {% endif %}
 
-
-    {% if query_string %}
     <h2><a href="/">&lt; Home</a></h2>
+    {% if definition == "DNE" %}
+        <h1><em>no definitions found for {{ query_string }}  but maybe these photos will help you understand the word.</em></h1>
+    {% else %}
         <h1>{{ query_string }} ({{ pos }}) : {{ definition }}</h1>
+    {% endif %}
 
     {% if tumble %}
     <div style="width:100%; overflow:auto">
@@ -69,8 +75,6 @@
     </div>
     {% endif %}
 
-
-    {% endif %} <!-- End Found Entries -->
 </div>
 
 
