@@ -9,24 +9,28 @@
 <div style="width:100%; text-align:center">
 
     {% if name %}
-     <p style="font-size:14pt">This is an example of a django app connecting to social APIs. <br />
-            Code at <a href="http://github.com/katychuang/django-snapbook">github</a></p>
-
-    <ul class="home">
-        <li>Examples of pulling images from social api:</li>
-        <!--li><a href="/flickr">/flickr</a></li-->
-        <li><a href="/instagram">/instagram</a></li>
-        <li><a href="/tumblr">/tumblr</a></li>
-        <!--li><a href="/twitter">/twitter</a></li-->
-    </ul>
 
     <div>
         <form method="get" action="/search/">
-            <label>Example of finding definition:</label>
+            <label>Start here. Type in a word:</label>
             <input type="text" placeholder="Type something..." name="q" id="id_q" size="35" />
             <input type="submit" value="Search">
         </form>
     </div>
+
+
+     <p style="font-size:14pt">
+        <b>About:</b>
+        <br />This is an example of a django app connecting to social APIs. <br />
+            Code at <a href="http://github.com/katychuang/django-snapbook">github</a></p>
+
+    <ul class="home">
+        <li>Examples of pulling images from social api:</li>
+        <li><a href="/instagram">/instagram</a></li>
+        <li><a href="/tumblr">/tumblr</a></li>
+        <!--li><a href="/twitter">/twitter</a></li-->
+        <!--li><a href="/flickr">/flickr</a></li-->
+    </ul>
 
     <hr />
 
