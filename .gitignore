@@ -3,3 +3,5 @@ settings/__init__.py
 *.pyc
 .DS_Store
 example/views.py
+*.pyc
+
