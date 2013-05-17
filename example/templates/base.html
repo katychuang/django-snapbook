@@ -12,13 +12,13 @@
         background-color: white;
         color: #444444;
         font-family: 'Walter Turncoat';
-        font-size:18pt;
-        padding: 5px 20px;
+        font-size:28pt;
+        padding: 5px 0px;
         text-align: center;
         margin: 0;
     }
     /*ul li {    text-align: center;    list-style-type: none;}*/
-    .home {background:#eeeeee; padding: 15px 0; }
+    .home {background:#f9f0f6; padding: 15px 0; }
     .home li {    display: inline;    margin: 20px;}
     .home li a {    color: #2083ad;}
     .home li a:hover {    color: #aa1111;}
@@ -26,13 +26,14 @@
     .articles { text-align: left; font-size: 16pt;}
 
     input[type=text] {
-width: 218px;
-}
+    width: 218px;
+    height:20pt;
+    }
 
-input[type=submit] {
-background: #000;
-color: #fff;
-}
+    input[type=submit] {
+    background: #000;
+    color: #fff;
+    }
 
 
     </style>
@@ -44,15 +45,12 @@ color: #fff;
 <h2><a href="/">{{ page_title }}</a></h2>
 {% endblock header %}
 
-
-
 {% block main %}
 {% endblock main %}
 
-
 {% block footer %}
 <h2>
-    <font size="1">&copy; 2013 Katherine Chuang</font>
+    <font size="3">&copy; 2013 Developed by <a href="http://github.com/katychuang">Katherine Chuang</a>, made with Python</font>
 </h2>
 {% endblock footer %}
 

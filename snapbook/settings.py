@@ -1,5 +1,9 @@
 # Django settings for snapbook project.
 import os
+from django.conf import settings
+
+from django.db import models
+from example.models import *
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG

@@ -7,32 +7,27 @@
 
 {% block main %}
 <div style="width:100%; text-align:center">
-
     {% if name %}
 
-    <div>
+    <div style="height:220px;margin: 10%;padding: 100px 0 0 0; border: 1px solid #ccc">
         <form method="get" action="/search/">
-            <label>Start here. Type in a word:</label>
+            <label>Start here. Type in a word:</label><br />
             <input type="text" placeholder="Type something..." name="q" id="id_q" size="35" />
             <input type="submit" value="Search">
         </form>
     </div>
 
-
-     <p style="font-size:14pt">
-        <b>About:</b>
-        <br />This is an example of a django app connecting to social APIs. <br />
-            Code at <a href="http://github.com/katychuang/django-snapbook">github</a></p>
-
     <ul class="home">
-        <li>Examples of pulling images from social api:</li>
+        <p style="font-size:14pt">
+        This is an example of a django app connecting to social APIs, pulling images and text.
+        Open sourced. Code at <a href="http://github.com/katychuang/django-snapbook">github</a></p>
+        <li>How it works:</li>
         <li><a href="/instagram">/instagram</a></li>
         <li><a href="/tumblr">/tumblr</a></li>
         <!--li><a href="/twitter">/twitter</a></li-->
         <!--li><a href="/flickr">/flickr</a></li-->
     </ul>
 
-    <hr />
 
     {% endif %}
 
@@ -84,7 +79,6 @@
         </ul>
     </div>
     {% endif %}
-
 </div>
 
 

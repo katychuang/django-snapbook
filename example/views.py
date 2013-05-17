@@ -56,7 +56,7 @@ def grams(request):
         p.append(media.images['standard_resolution'].url)
 
     #pass to template
-    return render_to_response("example/index.html", {'popular': p, 'page_title': 'Photos from Instagram'})
+    return render_to_response("example/index.html", {'popular': p, 'page_title': 'Top photos from Instagram'})
 
 
 def tumblr(request):
@@ -77,7 +77,7 @@ def tumblr(request):
                 t.append(imgpath)
 
     return render_to_response("example/index.html",
-                              {'popular': t, 'page_title': 'Photos from tumblr'}
+                              {'popular': t, 'page_title': 'Photos from tumblr tagged with #fashion'}
                               )
 
 
