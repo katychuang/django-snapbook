@@ -1,76 +1,68 @@
 <!doctype html>
-    <head>
+<head>
     {% block css %}
     <style>
-    a { text-decoration: none}
+        a { text-decoration: none; color:#666666;}
 
-    body { font-family: verdana; margin:0; padding:0; font-family: 'Cardo'; font-size:18pt;}
-    a {color:#666666;}
-    h1 {color:#666666;    font-family: 'Cardo';    font-size:18pt;}
-    h2 {
-        width: 100%;
-        background-color: white;
-        color: #444444;
-        font-family: 'Walter Turncoat';
-        font-size:28pt;
-        padding: 5px 0px;
-        text-align: center;
-        margin: 0;
-    }
-    /*ul li {    text-align: center;    list-style-type: none;}*/
-    .home {background:#f9f0f6; padding: 15px 0; }
-    .home li {    display: inline;    margin: 20px;}
-    .home li a {    color: #2083ad;}
-    .home li a:hover {    color: #aa1111;}
-    .photos li {display:inline; }
-    .articles { text-align: left; font-size: 16pt;}
+        body { font-family: verdana; margin:0; padding:0;
+        font-family: 'Cardo'; font-size:18pt;}
 
-    input[type=text] {
-    width: 218px;
-    height:20pt;
-    }
+        h1 {color:#666666; font-family: 'Cardo'; font-size:18pt;}
 
-    input[type=submit] {
-    background: #000;
-    color: #fff;
-    }
+        h2 { width: 100%; background-color: white; color: #444444;
+            font-family: 'Walter Turncoat'; font-size:28pt;
+            padding: 5px 0px; text-align: center; margin: 0; }
 
+        .home {background:#f9f0f6; padding: 15px 0; }
+        .home li { display: inline; margin: 20px;}
+        .home li a { color: #2083ad;}
+        .home li a:hover { color: #aa1111;}
+
+        .photos li {display:inline; }
+
+        .articles { text-align: left; font-size: 16pt;}
+
+        input[type=text] { width: 218px; height:20pt; }
+        input[type=submit] { background: #000; color: #fff; }
 
     </style>
     {% endblock css %}
-    </head>
-
+</head>
 <body>
-{% block header %}
-<h2><a href="/">{{ page_title }}</a></h2>
-{% endblock header %}
+    {% block header %}
 
-{% block main %}
-{% endblock main %}
+    <h2>
+        <a href="/">{{ page_title }}</a>
+    </h2>
+    {% endblock header %}
+    {% block main %} {% endblock main %}
 
-{% block footer %}
-<h2>
-    <font size="3">&copy; 2013 Developed by <a href="http://github.com/katychuang">Katherine Chuang</a>, made with Python</font>
-</h2>
-{% endblock footer %}
-
-{% block javascript %}
-<!--script src="/js/fonts.js"></script-->
-<script type="text/javascript">
-WebFontConfig = {
-google: { families: [ 'Poiret+One::latin','Lato', 'Walter+Turncoat::latin', 'Muli', 'Swanky+and+Moo+Moo', 'Cardo'] }};
+    {% block footer %}
+    <h2>
+        <font size="3">
+            &copy; 2013 Developed by
+            <a href="http://github.com/katychuang">Katherine Chuang</a>
+            , made with Python
+        </font>
+    </h2>
+    {% endblock footer %} {% block javascript %}
+    <!--script src="/js/fonts.js"></script-->
+    <script type="text/javascript">
+    WebFontConfig = {
+    google: {
+        families: ['Poiret+One::latin', 'Lato', 'Walter+Turncoat::latin', 'Muli', 'Swanky+and+Moo+Moo', 'Cardo']
+    }
+};
 (function() {
-var wf = document.createElement('script');
-wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-  '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-wf.type = 'text/javascript';
-wf.async = 'true';
-var s = document.getElementsByTagName('script')[0];
-s.parentNode.insertBefore(wf, s);
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
 })();
-</script>
-
-{% endblock javascript %}
-
+    </script>
+    {% endblock javascript %}
 </body>
+
 </html>
