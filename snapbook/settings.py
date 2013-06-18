@@ -1,9 +1,5 @@
-# Django settings for snapbook project.
 import os
-from django.conf import settings
-
-from django.db import models
-from example.models import *
+# Django settings for snapbook project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -12,15 +8,17 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+ROOT_PATH = os.path.abspath(__file__[:-20])
+
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '../sqlite.db',                      # Or path to database file if using sqlite3.
+        'NAME': 'sqlite.db',        # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
+        'USER': 'admin',
+        'PASSWORD': 'kat',
         'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',                      # Set to empty string for default.
     }
@@ -88,7 +86,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'txzeh9e7magnk)dgt#eya@*tphow03y4_c841nat=j_gas19ev'
+SECRET_KEY = 'cwq!&x_3)u0_zcw3%tp73$=^va8z3*yy7h8=n-d(q__-zsy!re'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -160,10 +158,3 @@ LOGGING = {
         },
     }
 }
-
-# Parse database configuration from $DATABASE_URL
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
-
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
