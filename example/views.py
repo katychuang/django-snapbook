@@ -33,7 +33,7 @@ def flickr(request):
     #pprint(result['photos']['photo'])
     t = []
     for item in result['photos']['photo']:
-        print item
+        #print item
         src = "http://farm{0}.staticflickr.com/{1}/{2}_{3}.jpg".format(item['farm'], item['server'], item['id'], item['secret'])
         t.append(src)
         #imgpath = "<div class=\"slide\"><img src=\"" + src + "\"></div>"
@@ -52,7 +52,7 @@ def grams(request):
     #add popular images
     p = []
     for media in popular_media:
-        print media.images['standard_resolution'].url
+        #print media.images['standard_resolution'].url
         p.append(media.images['standard_resolution'].url)
 
     #pass to template
