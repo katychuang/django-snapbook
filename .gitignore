@@ -1,7 +1,6 @@
-
-settings/__init__.py
 *.pyc
 .DS_Store
+
 example/views.py
-*.pyc
+example/base_settings.py
 
