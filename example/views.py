@@ -29,8 +29,6 @@ def flickr(request):
     flickr = flickrapi.FlickrAPI(api_key, api_secret, format='json')
     photos = flickr.photos_search(user_id='73509078@N00', per_page='10')
 
-#    print result
-
     t = []
     for item in result['photos']['photo']:
         src = "http://farm{0}.staticflickr.com/{1}/{2}_{3}.jpg".format(item['farm'], item['server'], item['id'], item['secret'])

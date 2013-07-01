@@ -63,7 +63,7 @@ def normalize_query(query_string,
         and grouping quoted words together.
         Example:
 
-        >>> normalize_query('  some random  words "with   quotes  " and   spaces')
+    >>> normalize_query('  some random  words "with   quotes  " and   spaces')
         ['some', 'random', 'words', 'with quotes', 'and', 'spaces']
 
     '''
@@ -104,7 +104,7 @@ def search(request):
         nyt_api = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
         nyt = "http://api.nytimes.com/svc/search/v1/article?format=json&query={0}&api-key={1}".format(query_string,nyt_api)
 
-        pearson_api = "191974694fb48173856e0f213e19a413"
+        pearson_api = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
         pearson = "http://api.pearson.com/v2/dictionaries/entries?headword="+query_string+"&apikey="+pearson_api
         resultP = simplejson.load(urllib.urlopen(pearson))
 
@@ -123,18 +123,17 @@ def search(request):
         #print result1
         for p in result1['results']:
             try:
-                title = p['title']
-                author = p['byline']
-                body = p['body']
-                u = p['url']
-                n.append({'title': title, 'author': author, 'body': body, 'url': u})
+                n.append({'title': p['title'],
+                          'author': p['byline'],
+                          'body': p['body'],
+                          'url': p['url']
+                         })
             except:
                 pass
 
         t = []
         result2 = simplejson.load(urllib.urlopen(tumblr))
         for p in result2['response']:
-
             if ('photos' in p):
                 x = p['photos']
                 for item in x:
@@ -142,6 +141,13 @@ def search(request):
                     thumbnail = alt[1]['url']
                     t.append(thumbnail)
 
+    context = {'query_string': query_string,
+               'tumble': t,
+               'nyt': n,
+               'pos': pos,
+               'definition': definition
+               }
+
     return render_to_response('example/index.html',
-                              {'query_string': query_string, 'tumble': t, 'nyt': n, 'pos': pos, 'definition': definition},
+                              context,
                               context_instance=RequestContext(request))
