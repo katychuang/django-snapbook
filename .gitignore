@@ -2,5 +2,5 @@
 .DS_Store
 
 example/views.py
-example/base_settings.py
+#example/base_settings.py
 
