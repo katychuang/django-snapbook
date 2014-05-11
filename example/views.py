@@ -16,8 +16,12 @@ from example.models import *
 
 
 def home(request):
+    context = { 'page_title': 'django-snapbook'
+              , 'name':       'home'
+              , 'fonts':      list(Style.objects.all())
+              }
 
-    return render_to_response("example/index.html", {'page_title': 'django-snapbook', 'name': 'home', 'fonts': list(Style.objects.all())})
+    return render_to_response("pages/index.html", context)
 
 
 def flickr(request):
@@ -34,8 +38,11 @@ def flickr(request):
         src = "http://farm{0}.staticflickr.com/{1}/{2}_{3}.jpg".format(item['farm'], item['server'], item['id'], item['secret'])
         t.append(src)
 
-    return render_to_response("example/index.html", {'popular': t, 'page_title': 'Photos from Flickr'})
+    context = { 'popular':    t
+              , 'page_title': 'Photos from Flickr'
+              }
 
+    return render_to_response("pages/index.html", context)
 
 def grams(request):
     api = InstagramAPI(client_id=INSTAGRAM_CLIENT_ID,
@@ -50,7 +57,7 @@ def grams(request):
         p.append(media.images['standard_resolution'].url)
 
     #pass to template
-    return render_to_response("example/index.html",
+    return render_to_response("pages/index.html",
             {'popular': p, 'page_title': 'Top photos from Instagram'})
 
 
@@ -71,9 +78,11 @@ def tumblr(request):
                 thumbnail = alt[1]['url']  # len(alt)-3
                 t.append(imgpath)
 
-    return render_to_response("example/index.html",
-                              {'popular': t, 'page_title': 'Photos from tumblr tagged with #fashion'}
-                              )
+    context = { 'popular':    t
+              , 'page_title': 'Photos from tumblr tagged with #fashion'
+              }
+
+    return render_to_response("pages/index.html", context)
 
 
 def tweets(request):
@@ -88,8 +97,7 @@ def tweets(request):
 
     t = []
 
-    return render_to_response("example/index.html",
-                              {'twitters': t, 'page_title': 'Photos from Twitter'})
+    return render_to_response("pages/index.html", context)
 
 
 def normalize_query(query_string,
@@ -189,5 +197,5 @@ def search(request):
               'fonts': list(Style.objects.all())
               }
 
-    return render_to_response('example/index.html', context,
+    return render_to_response('pages/index.html', context,
                               context_instance=RequestContext(request))
