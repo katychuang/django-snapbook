@@ -44,7 +44,8 @@ def flickr(request):
 
     return render_to_response("pages/index.html", context)
 
-def grams(request):
+
+def instagrams(request):
     api = InstagramAPI(client_id=INSTAGRAM_CLIENT_ID,
                        client_secret=INSTAGRAM_CLIENT_SECRET)
 

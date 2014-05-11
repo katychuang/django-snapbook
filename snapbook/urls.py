@@ -7,13 +7,13 @@ admin.autodiscover()
 urlpatterns = patterns('',
                        url(r'^$', 'example.views.home'),  # home page
                        url(r'^flickr/$', 'example.views.flickr'),  # Flickr
-                       url(r'^instagram/$', 'example.views.grams'),  # Instagram
                        url(r'^tumblr/$', 'example.views.tumblr'),  # Tumblr
                        url(r'^twitter/$', 'example.views.tweets'),  # Twitter
                        url(r'^search/$', 'example.views.search'),
 
                        # Examples:
                        # url(r'^snapbook/', include('snapbook.foo.urls')),
+   url(r'^instagram/$', 'example.views.instagrams'),  # Instagram
 
                        # Uncomment the admin/doc line below to enable admin documentation:
                        # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
