@@ -144,7 +144,9 @@ def search(request):
         tumblr = 'http://api.tumblr.com/v2/tagged?api_key={0}&tag={1}'.format(api_key, query_string)
 
         nyt_api = NYTIMES_API_KEY
-        nyt = "http://api.nytimes.com/svc/search/v1/article?format=json&query={0}&api-key=17d9623f92b7aab6e1430b41b1927462:14:67612802".format(query_string)
+
+        url = "http://api.nytimes.com/svc/search/v2/articlesearch.response-format?[q={0}&fq=filter-field:(filter-term)&additional-params=values]&api-key={1}".format(query_string, nyt_api)
+
 
         pearson = "http://api.pearson.com/v2/dictionaries/entries?headword="+query_string+"&apikey="+ PEARSON_API_KEY
 
