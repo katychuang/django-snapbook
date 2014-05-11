@@ -11,7 +11,7 @@ from django.db.models import Q
 from django.template import RequestContext
 import re
 
-from base_settings import *
+from base_settings import *     #import keys from base settings file
 from example.models import *
 
 
@@ -25,8 +25,7 @@ def home(request):
 
 
 def flickr(request):
-    # url = 'http://api.flickr.com/services/rest/'
-    # method = 'flickr.groups.pools.getPhotos'
+
     api_key = FLICKR_API_KEY
     api_secret = FLICKR_API_SECRET
 
@@ -87,16 +86,14 @@ def tumblr(request):
 
 
 def tweets(request):
-    consumer_key = TWITTER_CONSUMER_KEY
-    consumer_secret = TWITTER_CONSUMER_SECRET
-    key = TWITTER_KEY
-    secret = TWITTER_SECRET
-
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(key, secret)
+    auth = tweepy.OAuthHandler(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET)
+    auth.set_access_token(TWITTER_KEY, TWITTER_SECRET)
     api = tweepy.API(auth)
 
     t = []
+    context = { 'twitters':    t
+              , 'page_title': 'Photos from Twitter'
+              }
 
     return render_to_response("pages/index.html", context)
 
@@ -104,6 +101,7 @@ def tweets(request):
 def normalize_query(query_string,
                     findterms=re.compile(r'"([^"]+)"|(\S+)').findall,
                     normspace=re.compile(r'\s{2,}').sub):
+
     ''' Splits the query string in invidual keywords, getting rid of unecessary spaces
         and grouping quoted words together.
         Example:
@@ -118,7 +116,6 @@ def normalize_query(query_string,
 def get_query(query_string, search_fields):
     ''' Returns a query, that is a combination of Q objects. That combination
         aims to search keywords within a model by testing the given search fields.
-
     '''
     query = None  # Query to search for every search term
     terms = normalize_query(query_string)

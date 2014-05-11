@@ -5,19 +5,20 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-                       url(r'^$', 'example.views.home'),  # home page
-                       url(r'^flickr/$', 'example.views.flickr'),  # Flickr
-                       url(r'^tumblr/$', 'example.views.tumblr'),  # Tumblr
-                       url(r'^twitter/$', 'example.views.tweets'),  # Twitter
-                       url(r'^search/$', 'example.views.search'),
+   url(r'^$', 'example.views.home'),  # home page
 
-                       # Examples:
-                       # url(r'^snapbook/', include('snapbook.foo.urls')),
+   url(r'^flickr/$',    'example.views.flickr'),  # Flickr
    url(r'^instagram/$', 'example.views.instagrams'),  # Instagram
+   url(r'^tumblr/$',    'example.views.tumblr'),  # Tumblr
+   url(r'^twitter/$',   'example.views.tweets'),  # Twitter
+   url(r'^search/$',    'example.views.search'),
 
-                       # Uncomment the admin/doc line below to enable admin documentation:
-                       # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+   # Examples:
+   # url(r'^snapbook/', include('snapbook.foo.urls')),
 
-                       # Uncomment the next line to enable the admin:
-                       url(r'^admin/', include(admin.site.urls)),
-                       )
+   # Uncomment the admin/doc line below to enable admin documentation:
+   # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+
+   # Uncomment the next line to enable the admin:
+   url(r'^admin/', include(admin.site.urls)),
+   )
